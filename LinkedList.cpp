@@ -37,6 +37,36 @@ Node<T>* LinkedList<T>::getTail() const{
 }
 
 template<typename T>
+Node<T>* LinkedList<T>::search( T value ) const{
+
+  Node<T> * current = this->head;
+  bool isFound = false;
+
+  while( current != nullptr ){
+    if( current->data == value ){
+      isFound = true;
+      break;
+    }
+    current = current->next;
+  }
+
+  return (isFound) ? current : NULL;
+}
+
+template<typename T>
+int LinkedList<T>::getLength() const{
+   Node<T>* current = this->head;
+   int count = 0;
+
+   while( current != NULL ){
+     count++;
+     current = current->next;
+   }
+
+   return count;
+}
+
+template<typename T>
 void LinkedList<T>::listAppend( T value ){
    Node<T> *newborn = new Node<T>( value, nullptr );
 
@@ -152,18 +182,6 @@ void LinkedList<T>::printList() const{
   std::cout << std::endl;
 }
 
-template<typename T>
-int LinkedList<T>::getLength() const{
-   Node<T>* current = this->head;
-   int count = 0;
-
-   while( current != NULL ){
-     count++;
-     current = current->next;
-   }
-
-   return count;
-}
 
 
 
