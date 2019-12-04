@@ -8,11 +8,13 @@ int main(){
 
   LinkedList<int> mylist; 
   
-  mylist.listAppend( 12 );
+  mylist.listAppend( 100 );
+  mylist.listPrepend( 9 );
+  mylist.insertAfter( mylist.getHead(), 10 );
   mylist.insertAfter( mylist.getHead(), 16 );
+  mylist.insertAfter( mylist.getTail(), 22 );
+  mylist.removeAfter( mylist.getHead() );
 
-  cout << mylist.getHead()->data << endl;
-
-
+  mylist.printList();
   return 0;
 }

@@ -1,4 +1,6 @@
 #include "LinkedList.h"
+#include<iostream>
+
 // NODE
 // Implements a simple Data Node for LL()
 //
@@ -66,13 +68,89 @@ void LinkedList<T>::listPrepend( T value ){
 }
 
 template<typename T>
-void LinkedList<T>::insertAfter( Node<T>* curNode, T value ){
+void LinkedList<T>::insertAfter( Node<T>* node, T value ){
 
   Node<T>* newborn = new Node<T>( value, nullptr ); 
 
-  
+  //Traverse list, find node, insert newborn
+  //if newborn is new tail, update tail
+  //if we reach tail, we are done
+  Node<T>* current = this->head;
+  bool isFound = false;
+
+  while( current != nullptr ){
+    if( current == node ){
+      isFound = true;
+      break;
+    }
+    current = current->next;
+  }
+   
+  if( isFound ){
+    if( current == this->tail ){
+     current->next = newborn;
+     this->tail = newborn;
+    }else if( current == this->head ){
+      newborn->next = this->head->next;
+      this->head->next = newborn;
+    }else{
+      newborn->next = current->next;
+      current->next = newborn;
+    }
+  }
 }
 
+template<typename T>
+void LinkedList<T>::removeAfter( Node<T>* node ){
+  Node<T>* current = this->head;
+  bool isFound = false;
+
+  while( current != nullptr ){
+    if( current == node ){
+      isFound = true;
+      break;
+    }
+    current = current->next;
+  }
+
+  if( isFound ){
+    if( current->next == this->tail ){
+      this->tail = current;
+      current->next = nullptr;
+      delete current->next;
+    }else{
+      current->next = current->next->next;
+    }
+  }
+}
+
+template<typename T>
+void LinkedList<T>::removeHead(){
+  this->head = this->head->next;
+}
+
+template<typename T>
+void LinkedList<T>::removeTail(){
+  Node<T> * current = this->head;
+
+  while( current->next != this->tail ){
+    current = current->next;
+  }
+
+  this->tail = current;
+  current->next = nullptr;
+}
+
+template<typename T>
+void LinkedList<T>::printList() const{
+  Node<T> * current = this->head;
+
+  while( current != nullptr ){
+    std::cout << current->data << " ";
+    current = current->next;
+  }
+  std::cout << std::endl;
+}
 
 template<typename T>
 int LinkedList<T>::getLength() const{
