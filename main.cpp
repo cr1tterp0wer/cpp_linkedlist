@@ -2,6 +2,10 @@
 #include<assert.h>
 #include<string>
 #include "LinkedList.h"
+//
+// CHRISTOPHER APODACA
+// Single Linked List Full Implementation Test
+//
 
 using std::endl;
 using std::cout;
@@ -23,7 +27,7 @@ void testSearch(){
   mylist.listAppend("Abadon");
 
   assert( mylist.search("Devil") == mylist.getHead() );//TERMINATE IF FAIL
-  cout << "TestSearch(): PASSED - " << mylist.getHead()->data << endl;
+  cout << "TestSearch(): PASSED - ( Devil == " << mylist.getHead()->data << " )"<<endl;
 }
 
 void testGetLength(){
@@ -37,26 +41,13 @@ void testGetLength(){
 
   int len = mylist.getLength();
   assert( len == TEST_LENGTH ); //TERMINATE IF FAIL
-  cout << "TestGetLength(): PASSED - "<< len << endl;
+  cout << "TestGetLength(): PASSED - ( 5 == "<< len << " )" << endl;
 }
 
 int main(){
-//  testSearch();
-//  testGetLength();
-//
+  testSearch();
+  testGetLength();
 
-
-  LinkedList<string> mylist; 
-
-  mylist.removeTail();
-  mylist.listPrepend("Devil");
-  mylist.listPrepend("Satan");
-
-  mylist.removeAfter( mylist.search("Satan") );
-  mylist.listAppend("Lucifer");
-  mylist.listAppend("Azmodius");
-  mylist.listAppend("Abadon");
-
-//  mylist.printList();
   return 0;
 }
+
