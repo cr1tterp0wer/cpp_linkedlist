@@ -41,8 +41,22 @@ void testGetLength(){
 }
 
 int main(){
-  testSearch();
-  testGetLength();
+//  testSearch();
+//  testGetLength();
+//
 
+
+  LinkedList<string> mylist; 
+
+  mylist.removeTail();
+  mylist.listPrepend("Devil");
+  mylist.listPrepend("Satan");
+
+  mylist.removeAfter( mylist.search("Satan") );
+  mylist.listAppend("Lucifer");
+  mylist.listAppend("Azmodius");
+  mylist.listAppend("Abadon");
+
+//  mylist.printList();
   return 0;
 }

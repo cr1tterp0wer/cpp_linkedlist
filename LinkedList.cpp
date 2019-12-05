@@ -88,12 +88,13 @@ void LinkedList<T>::listAppend( T value ){
 template<typename T>
 void LinkedList<T>::listPrepend( T value ){
 
-  Node<T>* newborn = new Node<T>( value, this->head );
+  Node<T>* newborn = new Node<T>( value, nullptr ); 
 
   if( this->head == nullptr ){
     this->tail = newborn;
   }
 
+  newborn->next = this->head;
   this->head = newborn;
 }
 
@@ -144,25 +145,41 @@ void LinkedList<T>::removeAfter( Node<T>* node ){
   }
 
   if( isFound ){
-    if( current->next == this->tail ){
-      this->tail = current;
-      current->next = nullptr;
-      delete current->next;
-    }else{
-      current->next = current->next->next;
+    if( this->getLength() > 1 && current != this->tail ){
+      if( current->next == this->tail ){
+        current->next = nullptr;
+        this->tail = current;
+      }else
+        current->next = current->next->next;
     }
   }
 }
 
 template<typename T>
 void LinkedList<T>::removeHead(){
-  this->head = this->head->next;
+
+  if( this->head == nullptr )
+    return;
+
+  if( this->head == this->tail )
+    this->head = this->tail = nullptr;
+  else
+    this->head = this->head->next;
 }
 
 template<typename T>
 void LinkedList<T>::removeTail(){
-  Node<T> * current = this->head;
 
+  if( this->head == nullptr )
+    return;
+
+  if( this->head == this->tail ){
+    this->head = nullptr;
+    this->tail = nullptr;
+    return;
+  }
+
+  Node<T> * current = this->head;
   while( current->next != this->tail ){
     current = current->next;
   }
